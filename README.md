@@ -32,6 +32,10 @@ uv run whisper_transcriber_turbo_hardened.py
 
 mp4, mp3, m4a, wav, webm, ogg, flac, mkv, avi, mov
 
+## License
+
+MIT
+
 ## Notes
 
 - Model weights are stored in `models/` (gitignored due to size)
