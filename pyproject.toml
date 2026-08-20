@@ -1,0 +1,21 @@
+[project]
+name = "whisper-transcriber"
+version = "0.1.0"
+description = "CLI tool to transcribe video/audio files using OpenAI Whisper (turbo model)"
+readme = "README.md"
+authors = [
+    { name = "ChristofMilius", email = "Christof.Milius@proton.me" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "openai-whisper",
+    "torch",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true

@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Models (large binary files)
+models/*.pt
+models/*.bin
+
+# Transcripts (output files)
+*_transcript.txt
+*_transcript.vtt
+
+# Shortcuts
+*.lnk
+
+# uv
+uv.lock
