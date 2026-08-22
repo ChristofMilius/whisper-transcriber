@@ -36,5 +36,9 @@ models/*.bin
 # Shortcuts
 *.lnk
 
+# Local notes / side projects
+TODO.md
+YT_Transcript_downloader/
+
 # uv
 uv.lock
