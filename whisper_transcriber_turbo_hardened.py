@@ -63,26 +63,6 @@ else:
     # Windows systems
     signal.signal(signal.SIGINT, signal_handler)     # Ctrl+C/Ctrl+Break
 
-# Monkey-patch the model loader to check repo root first
-original_load_model = whisper.load_model
-
-def patched_load_model(name, device=None):
-    # First try loading from repo root /models
-    model_paths = [
-        os.path.join(os.getcwd(), "models", f"{name}.pt"),
-        os.path.join(os.getcwd(), "models", f"{name}.bin")
-    ]
-
-    for path in model_paths:
-        if os.path.exists(path):
-            print(f"  Loading model from custom path: {path}")
-            return whisper.load_model(name, device=device, download_root=os.path.dirname(path))
-
-    # Fall back to original behavior
-    return original_load_model(name, device=device)
-
-whisper.load_model = patched_load_model
-
 # Helpers
 def clear():
     os.system("cls" if os.name == "nt" else "clear")

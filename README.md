@@ -8,7 +8,6 @@ CLI tool to transcribe video/audio files using OpenAI Whisper (turbo model).
 - Optional VTT subtitle output with timestamps
 - GUI file dialogs (tkinter) with manual fallback
 - WSL2 path conversion support
-- Custom model loading from local `models/` directory
 - Graceful signal handling (Ctrl+C)
 - GPU acceleration via CUDA (automatic, CPU fallback)
 
@@ -53,6 +52,20 @@ uv run python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_
 
 Prints `True <GPU name>` when GPU acceleration is active; `False cpu` means transcription runs on CPU.
 
+## Model Weights
+
+The tool always loads the **turbo** model (`large-v3-turbo`, ~1.6 GB) through Whisper's standard
+model resolution:
+
+1. **User cache** — if the checkpoint already exists in `~/.cache/whisper/` (Windows:
+   `%USERPROFILE%\.cache\whisper`, override via `XDG_CACHE_HOME`), it is loaded from there.
+2. **Auto-download** — otherwise it is downloaded on first run into that cache (~1.6 GB, one time)
+   and reused for every subsequent launch.
+
+No manual setup is required: launch once and let Whisper fetch the checkpoint automatically.
+If you manage the weights yourself (e.g. offline machines), place a downloaded
+`large-v3-turbo.pt` into the cache directory shown above.
+
 ## Usage
 
 ```bash
@@ -69,5 +82,5 @@ MIT
 
 ## Notes
 
-- Model weights are stored in `models/` (gitignored due to size)
+- Model weights: see [Model Weights](#model-weights) (stored in Whisper's user cache, not in the repo)
 - GPU acceleration: see [GPU Acceleration (CUDA)](#gpu-acceleration-cuda)
