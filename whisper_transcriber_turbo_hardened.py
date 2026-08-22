@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-whisper_transcribe.py
----------------------.
+whisper_transcriber_turbo_hardened.py
+-------------------------------------
 CLI tool to transcribe a video/audio file using OpenAI Whisper (turbo model).
 Works on Windows and WSL2 (requires tkinter + X server for GUI dialogs,
 falls back to manual path input if unavailable).
@@ -14,8 +14,7 @@ Dependencies:
 import os
 import sys
 import signal
-import textwrap
-from typing import Optional, Tuple
+from typing import Optional
 
 # Core dependencies
 try:
@@ -39,17 +38,8 @@ try:
 except ImportError:
     TK_AVAILABLE = False
 
-# Platform-specific imports
-if os.name == 'posix':
-    import fcntl
-    import termios
-
 # Signal handling
-shutdown_requested = False
-
 def signal_handler(signum, frame):
-    global shutdown_requested
-    shutdown_requested = True
     print(f"\n\n  [!] Received signal {signum}. Shutting down gracefully...")
     sys.exit(0)
 
@@ -283,7 +273,7 @@ def run_transcription(input_path: str, txt_path: str, vtt_path: Optional[str], l
 
 # Main menu loop
 def main_menu():
-    while not shutdown_requested:
+    while True:
         clear()
         banner()
         print("  MAIN MENU")
@@ -345,6 +335,9 @@ def transcribe_flow():
 if __name__ == "__main__":
     try:
         main_menu()
+    except EOFError:
+        print("\n\n  [!] Input stream closed. Exiting...")
+        sys.exit(0)
     except KeyboardInterrupt:
         print("\n\n  [!] Interrupted by user. Exiting...")
         sys.exit(0)

@@ -83,4 +83,5 @@ MIT
 ## Notes
 
 - Model weights: see [Model Weights](#model-weights) (stored in Whisper's user cache, not in the repo)
+- Output files are written unconditionally — existing `_transcript.txt` / `.vtt` files are overwritten without confirmation
 - GPU acceleration: see [GPU Acceleration (CUDA)](#gpu-acceleration-cuda)
