@@ -7,8 +7,7 @@ Works on Windows and WSL2 (requires tkinter + X server for GUI dialogs,
 falls back to manual path input if unavailable).
 
 Dependencies:
-    pip install openai-whisper
-    pip install torch  (GPU: pip install torch --index-url https://download.pytorch.org/whl/cu128)
+    uv sync  (installs openai-whisper + torch with CUDA support from the pinned cu128 index)
     ffmpeg must be on PATH
 """
 
@@ -23,14 +22,14 @@ try:
     import whisper
 except ImportError:
     print("\n  [!] openai-whisper is not installed.")
-    print("      Run:  pip install openai-whisper")
+    print("      Run:  uv sync")
     sys.exit(1)
 
 try:
     import torch
 except ImportError:
     print("\n  [!] torch is not installed.")
-    print("      Run:  pip install torch")
+    print("      Run:  uv sync")
     sys.exit(1)
 
 try:
